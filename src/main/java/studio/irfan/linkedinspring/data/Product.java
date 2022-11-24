@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT_ID")
     private Long Product_Id;
     @Column(name = "NAME")
@@ -14,14 +14,14 @@ public class Product {
     @Column(name = "PRICE")
     private float Price;
     @Column(name = "DESCRIPTION")
-    private float Description;
+    private String Description;
     @Column(name = "QUANTITY")
     private int Quantity;
 
     public Product() {
     }
 
-    public Product(Long product_Id, String name, float price, float description, int QUANTITY) {
+    public Product(Long product_Id, String name, float price, String description, int QUANTITY) {
         Product_Id = product_Id;
         Name = name;
         Price = price;
@@ -53,11 +53,11 @@ public class Product {
         Price = price;
     }
 
-    public float getDescription() {
+    public String getDescription() {
         return Description;
     }
 
-    public void setDescription(float description) {
+    public void setDescription(String description) {
         Description = description;
     }
 

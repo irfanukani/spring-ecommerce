@@ -21,4 +21,10 @@ public class ProductServieImpl implements ProductService {
         Page<Product> page = productRepository.findAll(PageRequest.of(0, 1));
         return page.stream().toList();
     }
+
+    @Transactional
+    public boolean addProduct(Product product) {
+        productRepository.save(product);
+        return true;
+    }
 }

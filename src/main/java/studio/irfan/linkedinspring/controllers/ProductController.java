@@ -1,21 +1,32 @@
 package studio.irfan.linkedinspring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import studio.irfan.linkedinspring.data.Product;
 import studio.irfan.linkedinspring.service.ProductService;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/products")
 public class ProductController {
-    @Autowired
-    private ProductService productService;
 
-    @GetMapping("/products")
-    List<Product> getAllProducts() {
-        System.out.println("Request");
+    private final ProductService productService;
+
+    @Autowired
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
+    @GetMapping("")
+    public List<Product> getAllProducts(Model model) {
         return productService.getProducts(0, 5);
+    }
+
+    @PostMapping("/add")
+    public String addProduct(@RequestBody Product product) {
+        productService.addProduct(product);
+        return "Added";
     }
 }
